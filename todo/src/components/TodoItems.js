@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addItem } from '../actions/index'
+import { addItem, toggleItem } from '../actions/index'
 import { connect } from 'react-redux';
 
 class TodoItems extends Component {
@@ -15,6 +15,11 @@ class TodoItems extends Component {
         })
     }
 
+    toggleItem = (e, index) => {
+        e.preventDefault()
+        this.props.toggleItem(index)
+    }
+
     handleChanges = (e) => {
         e.preventDefault();
         this.setState({
@@ -23,12 +28,11 @@ class TodoItems extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
         <div>
-            {this.props.todoItems.map( item => {
+            {this.props.todoItems.map( (item, index) => {
                 return (
-                    <p key={item}>{item}</p>
+                    <p onClick={(e) => this.toggleItem(e, index)} key={index}>{item.item}</p>
             )
             })}
             <input type="text" value={this.state.inputText} onChange={this.handleChanges}/>
@@ -40,8 +44,8 @@ class TodoItems extends Component {
 
 const mapStateToProps = state => {
     return {
-        todoItems: state.todo,
+        todoItems: state.todoItems,
     }
 } 
 
-export default connect(mapStateToProps, { addItem })(TodoItems)
+export default connect(mapStateToProps, { addItem, toggleItem })(TodoItems)
