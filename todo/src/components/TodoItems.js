@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addItem, toggleItem } from '../actions/index'
+import { addItem, toggleItem, deleteItems } from '../actions/index'
 import { connect } from 'react-redux';
 
 class TodoItems extends Component {
@@ -13,6 +13,11 @@ class TodoItems extends Component {
         this.setState({
             inputText: ''
         })
+    }
+
+    deleteItemsFunc = (e) => {
+        e.preventDefault();
+        this.props.deleteItems()
     }
 
     toggleItem = (e, index) => {
@@ -37,6 +42,7 @@ class TodoItems extends Component {
             })}
             <input type="text" value={this.state.inputText} onChange={this.handleChanges}/>
             <button onClick={this.addItemFunc}>Add Item</button>
+            <button onClick={this.deleteItemsFunc}>Delete Completed Items</button>
         </div>
         )
     }
@@ -48,4 +54,4 @@ const mapStateToProps = state => {
     }
 } 
 
-export default connect(mapStateToProps, { addItem, toggleItem })(TodoItems)
+export default connect(mapStateToProps, { addItem, toggleItem, deleteItems })(TodoItems)

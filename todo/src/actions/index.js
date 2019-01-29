@@ -1,5 +1,6 @@
 export const ADD_ITEM = "ADD_ITEM";
 export const TOGGLE_ITEM = "TOGGLE_ITEM";
+export const DELETE_ITEMS = "DELETE_ITEMS";
 
 export const addItem = item => {
     // console.log('action', item)
@@ -19,5 +20,11 @@ export const toggleItem = index => {
         payload: {
             index
         }
+    }
+}
+
+export const deleteItems = () => {
+    return {
+        type: "DELETE_ITEMS"
     }
 }
