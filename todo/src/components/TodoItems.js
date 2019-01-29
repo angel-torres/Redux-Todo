@@ -38,17 +38,18 @@ class TodoItems extends Component {
 
     render() {
         return (
-        <div>
+        <div style={{width: "700px", margin: "auto"}}> 
+            <form className="input-group row">
+                <input className="form-control form-control-lg" type="text" value={this.state.inputText} onChange={this.handleChanges}/>
+                <button className="btn btn-primary btn-lg" onClick={this.addItemFunc}>Add Item</button>
+                <button className="btn btn-danger btn-lg" onClick={this.deleteItemsFunc}>Delete Completed Items</button>
+            </form>
+            <br/>
             {this.props.todoItems.map( (item, index) => {
                 return (
-                    <p className={item.completed === true ? "alert alert-danger" : "alert alert-success"} onClick={(e) => this.toggleItem(e, index)} key={index}>{item.item}</p>
+                    <p className={item.completed === true ? "alert alert-danger" : "alert alert-primary"} onClick={(e) => this.toggleItem(e, index)} key={index}>{item.item}</p>
             )
             })}
-            <form>
-                <input type="text" value={this.state.inputText} onChange={this.handleChanges}/>
-                <button onClick={this.addItemFunc}>Add Item</button>
-                <button onClick={this.deleteItemsFunc}>Delete Completed Items</button>
-            </form>
         </div>
         )
     }
